@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "finalproject",
   "version": "1.0.0",
   "description": "Issue Tracker for tracking software bugs during the software development life cycle",
@@ -42,8 +41,7 @@
     "nodejs": "^0.0.0",
     "react-icons": "^5.4.0",
     "vite": "^6.0.3"
-  }
-=======
+  },
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
@@ -91,5 +89,4 @@
   "main": "index.html",
   "author": "Drake Hager",
   "license": "MIT"
->>>>>>> origin/main
 }
