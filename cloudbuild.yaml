@@ -1,0 +1,35 @@
+steps:
+  # Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['ci']
+    dir: 'Frontend'
+    env:
+      - 'GOOGLE_NODE_RUN_SCRIPTS='
+
+  # Run build
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+    dir: 'Frontend'
+    env:
+      - 'GOOGLE_NODE_RUN_SCRIPTS='
+
+  # Build Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/unified-parser-434715-p2/drake-hager', '.']
+
+  # Push Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/unified-parser-434715-p2/drake-hager']
+
+  # Deploy to Google Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: [
+      'gcloud', 'run', 'deploy', 'finalproject-service',
+      '--image', 'gcr.io/unified-parser-434715-p2/drake-hager',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated'
+    ]
+
+images:
+  - 'gcr.io/unified-parser-434715-p2/drake-hager'
